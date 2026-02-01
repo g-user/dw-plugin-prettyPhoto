@@ -33,7 +33,7 @@
 			overlay_gallery_max: 30, /* Maximum number of pictures in the overlay gallery */
 			keyboard_shortcuts: true, /* Set to false if you open forms inside prettyPhoto */
 			changepicturecallback: function(){}, /* Called everytime an item is shown/changed */
-			callback: function(){}, /* Called when prettyPhoto is closed */
+			callback: function(){$("html, body").scrollTop(scrollPosition);}, /* Called when prettyPhoto is closed */
 			ie6_fallback: true,
 			markup: '<div class="pp_pic_holder"> \
 						<div class="ppt">&nbsp;</div> \
@@ -95,7 +95,7 @@
 		}, pp_settings);
 		
 		// Global variables accessible only by prettyPhoto
-		var matchedObjects = this, percentBased = false, pp_dimensions, pp_open,
+		var matchedObjects = this, percentBased = false, pp_dimensions, pp_open,scrollPosition,
 		
 		// prettyPhoto container specific
 		pp_contentHeight, pp_contentWidth, pp_containerHeight, pp_containerWidth,
@@ -141,6 +141,8 @@
 		*/
 		$.prettyPhoto.initialize = function() {
 			
+			scrollPosition=$(document).scrollTop();
+
 			settings = pp_settings;
 			
 			if(settings.theme == 'pp_default') settings.horizontal_padding = 16;
